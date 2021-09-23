@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+      <form class="form-signup" method='POST'>{% csrf_token %}
+          <div class="row mt-3 mb-3">
+            <legend>Please sign up</legend>
+          </div>
+          <div class="row mb-3">
+            <label for="Username" class="col-sm-1 col-form-label">Username</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="Username" placeholder="Username" name="username_data" required autofocus>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="Password" class="col-sm-1 col-form-label">Password</label>
+            <div class="col-sm-5">
+              <input type="password" class="form-control" id="Password" placeholder="Password" name="password_data" required>
+            </div>
+          </div>
+          <div class="row mb-3">
+          </div>
+          <button type="submit" class="btn btn-primary">Sign up</button>
+          <p class="mt-5 text=muted">&copy; 2017-2019</p>
+        </form>
+  </div>
+{% endblock content %}

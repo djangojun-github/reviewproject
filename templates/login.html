@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand mb-0 h1 text-warning" href="{% url 'list' %}">Review Project</a>
+    </div>
+</nav>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+        <div class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">Login</li>
+        </div>
+        <div class="d-flex">
+          <a class="nav-link" href="{% url 'signup' %}">サインアップ</a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+<form class="form-signin" method='POST'>{% csrf_token %}
+  <form>
+    <!--
+    <img class="mt-4 mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    -->
+    <h1 class="col-5 h3 mt-5 mb-3 fw-normal">Please login</h1>
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <div class="col-5 mt-3 mb-3 form-floating">
+      <input type="text" class="form-control" id="floatingInput" placeholder="username" name="username_data">
+      <label for="floatingInput">Username</label>
+    </div>
+    <div class="col-5 mb-3 form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password_data">
+      <label for="floatingPassword">Password</label>
+    </div>
+    <!--
+    <div class="checkbox col-5 mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    -->
+    <div class="col-3 mt-5">
+      <button class="w-100 btn btn-lg btn-primary" type="submit">login</button>
+    </div>
+    <div class="col-3 mt-5">
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <p><a href="{% url 'password_reset' %}">passwordをお忘れですか？</a></p>
+    </div>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+  </form>
+</main>
+</div>
+{% endblock content %}

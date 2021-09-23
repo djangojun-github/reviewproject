@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<link rel='stylesheet' type="text/css" href="{% static 'style.css' %}">
+{% endblock header %}
+
+{% block content %}
+<nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand mb-0 h1 text-warning" href="{% url 'list' %}">Review Project</a>
+            <form class="d-flex">
+                <span class="h6 mx-3 text-white">{{ user.username }}さん</span>
+            </form>
+        </div>
+</nav>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <div class="breadcrumb">
+              <li class="breadcrumb-item active" aria-current="page">一覧</li>
+            </div>
+            <div class="d-flex">
+              <a class="nav-link" href="{% url 'create' %}">レビュー作成</a>
+              <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+              <a class="nav-link" href="{% url 'password_change' %}">password変更</a>
+            </div>
+        </div>
+</nav>
+<div class=container>
+    {% for item in object_list %}
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+        <div class="col-md-4">
+            <img src="{{ item.images.url }}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+            <h5 class="card-title">{{ item.title }}</h5>
+            <p class="card-title">投稿者：{{ item.author }}</p>
+            <p class="card-text">レビューが参考になった人：{{ item.useful_review }}人</p>
+            <a href="{% url 'detail' item.pk %}" class="btn btn-primary">詳しく見る</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

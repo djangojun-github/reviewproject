@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand mb-0 h1 text-warning" href="{% url 'list' %}">Review Project</a>
+            <form class="d-flex">
+                <span class="h6 mx-3 text-white">{{ user.username }}さん</span>
+            </form>
+        </div>
+    </nav>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <div class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'list' %}">一覧</a></li>
+                <li class="breadcrumb-item active" aria-current="page">レビュー作成</li>
+            </div>
+            <div class="d-flex">
+                <a class="nav-link" href="{% url 'list' %}">戻る</a>
+                <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+            </div>
+        </div>
+</nav>
+<div class=container>
+    <form action='' method='POST' enctype="multipart/form-data">{% csrf_token %}
+        <div class="col-6 mt-3 mb-3">
+            <label for="FormControlInput1" class="form-label">タイトル</label>
+            <input type="text" class="form-control" name='title'>
+        </div>
+        <div class="col-6 mb-3">
+            <label for="FormControlTextarea1" class="form-label">内容</label>
+            <textarea class="form-control" name='content' rows="4"></textarea>
+        </div>
+        <div class="col-6 mb-3">
+            <label for="formFile" class="form-label">画像</label>
+            <input class="form-control" type="file" name='images'>
+        </div>
+        <div class="row">
+            <div class="col-4 align-self-start">
+                <label for="select" class="form-label">評価</label>
+                <select class="form-select" name='evaluation'>
+                    <option selected>選択してください</option>
+                    <option value="良い">良い</option>
+                    <option value="悪い">悪い</option>
+                </select>
+            </div>
+            <div class="col-4 align-self-end">
+                <input type="hidden" name='author' value="{{ user.id }}">
+                <button class="col-6 btn btn-primary" type="submit">作成する</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% else %}
+<nav class="navbar navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand mb-0 h1 text-warning" href="{% url 'list' %}">Review Project</a>
+        </div>
+    </nav>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">ログインしてください</span>
+            <div class="d-flex">
+                <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+            </div>
+        </div>
+</nav>
+{% endif %}
+{% endblock content %}
